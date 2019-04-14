@@ -1,0 +1,63 @@
+Question # 1 | Answer
+
+The code seems to be correct. The issue is with the shopify policy. It deny x-frame-options so we cant show the website. In order to solve this we can use a java script library like https://github.com/niutech/x-frame-bypass/ 
+The point is X-Frame-Options is just a response header, we can change the headers and it will work. 
+
+Here is the code that will work:
+<!DOCTYPE html>
+<script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+<body style="margin:0px;padding:0px;overflow:hidden">
+    <iframe is="x-frame-bypass" src="https://www.shopify.com" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom: 0px; width: 100%; height: 100%"> </iframe>
+</body>
+
+Question # 2 | Answer
+PHP VERSION: 
+<?php
+	$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+	$test = $_GET['test'];
+	if($iPhone)
+	{
+		if(isset($test))
+		{ 
+		  if ($test == "123")
+		  {
+		    echo "Hello World";
+		  }
+		  else
+		  {
+		  	echo "Incorrect Data!";
+		  }
+		}
+		else
+		{
+		  echo "Incorrect parameter!!";
+		}
+	}
+	else
+	{
+		echo "Only iphone allowed!";
+	}
+?>
+
+Java Script Version: 
+<htmL>
+<p id="hello"></p>
+
+<script>
+var url_string = window.location.href; //window.location.href
+var url = new URL(url_string);
+var test = url.searchParams.get("test");
+var iOS = /iPhone/.test(navigator.userAgent) && !window.MSStream;
+
+if(iOS == true)
+{
+	if(test == 123)
+	{
+		console.log("Hello World");
+		document.getElementById("hello").innerHTML = "Hello World";
+	}
+}
+</script>
+</htmL>
+
+
